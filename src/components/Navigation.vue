@@ -14,6 +14,12 @@
             >Products</router-link
           >
         </li>
+        <li class="nav-item">
+          <!-- add a router link to the articles page (don't use the a tag!) -->
+          <router-link to="/articles" class="nav-link" active-class="active"
+            >Articles</router-link
+          >
+        </li>
       </ul>
     </div>
   </nav>
