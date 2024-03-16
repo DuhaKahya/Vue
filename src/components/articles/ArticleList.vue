@@ -11,7 +11,7 @@
               v-for="article in articles"
               :key="article.id"
               :article="article"
-              :category_name="article.category_name"
+              :category="article.category_id"
             />
          </div>
       </div>
