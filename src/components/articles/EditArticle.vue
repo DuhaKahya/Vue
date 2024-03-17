@@ -6,12 +6,12 @@
           <h5 class="mb-4"></h5>
   
           <div class="input-group mb-3">
-            <span class="input-group-text">Title</span>
+            <span class="input-group-text" style="width: 150px;">Title</span>
             <input type="text" class="form-control" v-model="article.title" />
           </div>
 
           <div class="input-group mb-3">
-            <span class="input-group-text">Description</span>
+            <span class="input-group-text" style="width: 150px;">Description</span>
             <textarea
               class="form-control"
               v-model="article.description"
@@ -19,24 +19,24 @@
           </div>
   
           <div class="input-group mb-3">
-            <span class="input-group-text">Price</span>
+            <span class="input-group-text" style="width: 150px;">Price</span>
             <input type="number" class="form-control" v-model="article.price" />
           </div>
   
   
           <div class="input-group mb-3">
-            <span class="input-group-text">Image URL</span>
+            <span class="input-group-text" style="width: 150px;">Image URL</span>
             <input type="text" class="form-control" v-model="article.image" />
           </div>
 
           <div class="input-group mb-3">
-            <span class="input-group-text">Stock</span>
+            <span class="input-group-text" style="width: 150px;">Stock</span>
             <input type="text" class="form-control" v-model="article.stock" />
           </div>
 
   
           <div class="input-group mb-3">
-            <span class="input-group-text">Category</span>
+            <span class="input-group-text" style="width: 150px;">Category</span>
             <select class="form-select" v-model="article.category_id">
               <option value="0" selected>Choose...</option>
               <option
@@ -50,7 +50,7 @@
           <div class="input-group mt-4">
             <button type="button" class="btn btn-primary" @click="saveChanges">Save changes</button>
             
-            <button type="button" class="btn btn-danger" @click="cancelEditing">
+            <button type="button" class="btn btn-danger mx-3" @click="cancelEditing">
                 Cancel
             </button>
 
@@ -67,7 +67,7 @@
     name: "EditArticle",
     data() {
       return {
-        product: {
+        article: {
             title: "",
             description: "",
             price: "",
@@ -78,9 +78,10 @@
         categories: [],
       };
     },
-    mounted(){
-      fetchCategories();
-      this.editArticle(this.id);
+    mounted() {
+      this.fetchCategories();
+      const id = this.$route.params.id;
+      this.editArticle(id);
     },
     methods: {
         fetchCategories() {
@@ -89,13 +90,13 @@
             .catch(error => console.log(error));
         
       },
-        editArticle(id) {
-            Axios.get(`http://localhost/articles/${id}`)
-            .then(result => this.product = result.data)
-            .catch(error => console.log(error));
-        },
+      editArticle(id) {
+          Axios.get(`http://localhost/articles/${id}`) 
+              .then(result => this.article = result.data)
+              .catch(error => console.log(error));
+      },
         saveChanges() {
-            Axios.put(`http://localhost/articles/${this.product.id}`, this.product)
+            Axios.put(`http://localhost/articles/${this.article.id}`, this.article)
             .then(result => this.$router.push('/articles'))
             .catch(error => console.log(error));
         },

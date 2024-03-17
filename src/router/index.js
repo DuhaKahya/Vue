@@ -7,7 +7,7 @@ import CreateProduct from '../components/products/CreateProduct.vue';
 import EditProduct from '../components/products/EditProduct.vue';
 
 import ArticleList from '../components/articles/ArticleList.vue';
-import createArticle from '../components/articles/createArticle.vue';
+import CreateArticle from '../components/articles/CreateArticle.vue';
 import EditArticle from '../components/articles/EditArticle.vue';
 
 const routes = [
@@ -16,8 +16,8 @@ const routes = [
   { path: '/createproduct', component: CreateProduct },
   { path: '/editproduct/:id', component: EditProduct, props: true  },
   { path: '/articles', component: ArticleList },
-  { path: '/createArticle', component: createArticle },
-  { path: '/editArticle/:id', component: EditArticle, props: true  }
+  { path: '/createarticle', component: CreateArticle },
+  { path: '/editarticle/:id', component: EditArticle, props: true  }
  
 ];
 

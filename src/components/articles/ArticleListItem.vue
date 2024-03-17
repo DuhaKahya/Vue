@@ -8,7 +8,7 @@
         <div class="float-start">
           <p>{{ article.title }}</p>
           <p>
-            <small>{{ article.category_id }}</small>
+            <small>{{ article.category_name }}</small>
           </p>
         </div>
         <span class="price float-end">{{ "€" + article.price }}</span>
@@ -78,7 +78,7 @@
           .catch((error) => console.log(error));
       },
       editArticle(id) {
-        this.$router.push("/editArticle/" + id);
+        this.$router.push("/editarticle/" + id);
       },
     },
   };
