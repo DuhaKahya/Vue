@@ -7,15 +7,19 @@ import CreateArticle from '../components/articles/CreateArticle.vue';
 import EditArticle from '../components/articles/EditArticle.vue';
 
 import Login from '../components/Login.vue';
+import Register from '../components/Register.vue';
 
 const routes = [
   { path: '/', component: Home },
+  
   { path: '/articles', component: ArticleList },
   { path: '/createarticle', component: CreateArticle },
   { path: '/editarticle/:id', component: EditArticle, props: true  },
   
-  { path: '/login', component: Login }
-  
+  { path: '/login', component: Login },
+  { path: '/register', component: Register }  
+
+
 ];
 
 const router = createRouter({

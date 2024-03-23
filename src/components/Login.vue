@@ -3,7 +3,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <form>
+            <form v-if="!store.isLoggedIn">
               <div v-if="errorMessage != ''" class="alert alert-danger">
                 {{ errorMessage }}
               </div>
@@ -16,8 +16,13 @@
                 <label for="inputPassword" class="form-label">Password</label>
                 <input type="password" class="form-control" id="inputPassword" v-model="password" />
               </div>
-              <button type='button' class="btn btn-primary" @click="login">Submit</button>
+              <button type='button' class="btn btn-primary" @click="login">Login</button>
+
+             
+              <router-link to="/register" class="btn btn-primary mx-3">Register</router-link>
+
             </form>
+            <button v-else @click="logout" class="btn btn-danger">Logout</button>
           </div>
         </div>
       </div>
@@ -25,8 +30,6 @@
   </template>
   
   <script>
-  import { storeToRefs } from 'pinia';
-  import axios from '../axios-auth';
   import { useStore } from '../stores/store';
   
   export default {
@@ -37,25 +40,27 @@
     },
     data() {
       return {
-        username: "username",
-        password: "password",
+        username: "",
+        password: "",
         errorMessage : ""
       };
     },
     methods: {
       login() {
         this.store.login(this.username, this.password)
-        .then((res) => {
-          this.$router.replace("/articles");
-        })
-        .catch((error) => this.errorMessage = error);
+          .then(() => {
+            this.$router.replace("/");
+          })
+          .catch((error) => this.errorMessage = error);
       },
+      logout() {
+        this.store.logout();
+        this.$router.replace("/login");
+      }
     }
-    
   };
   </script>
   
-  
   <style>
-  
   </style>
+  
