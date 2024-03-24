@@ -1,13 +1,12 @@
 <template>
   <section>
     <div class="container">
-      <h2 class="mt-3 mt-lg-5">Articles</h2>
       <button type="button" class="btn btn-primary mt-3" @click="this.$router.push('/createArticle');">
         Add Article
       </button>
       <!-- Webshop Articles -->
       <div v-if="webshopArticles.length > 0">
-        <h3 class="mt-3 mt-lg-5">Webshop</h3>
+        <h2 class="mt-3 mt-lg-5">Articles</h2>
         <div class="row mt-3">
           <ArticleListItem
             v-for="article in webshopArticles"
@@ -19,7 +18,7 @@
       </div>
       <!-- Tickets Articles -->
       <div v-if="ticketsArticles.length > 0">
-        <h3 class="mt-3 mt-lg-5">Tickets</h3>
+        <h2 class="mt-3 mt-lg-5">Tickets</h2>
         <div class="row mt-3">
           <ArticleListItem
             v-for="article in ticketsArticles"
