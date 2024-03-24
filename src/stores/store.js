@@ -5,7 +5,6 @@ export const useStore = defineStore('counter', {
   state: () => ({
     token: '',
     username: '',
-    roleId: '',
   }),
   getters: {
     isLoggedIn: (state) => state.token !== '',
@@ -17,9 +16,7 @@ export const useStore = defineStore('counter', {
             username: username,
             password: password,
           })
-          .then((res) => {
-            // Haal roleId direct uit de respons
-            this.roleId = res.data.roleId;
+          .then((res) => {            
 
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data;
 
@@ -30,7 +27,6 @@ export const useStore = defineStore('counter', {
             // Zo kun je in de console je token zien in de 'application' tab
             localStorage.setItem('token', res.data);
             localStorage.setItem('username', username);
-            localStorage.setItem('roleId', res.data.roleId);
 
             // Resolve de Promise
             resolve();  
@@ -42,22 +38,18 @@ export const useStore = defineStore('counter', {
     autoLogin() {
       let token = localStorage.getItem('token');
       let username = localStorage.getItem('username');
-      let roleId = localStorage.getItem('roleId');
     
       if (token) {
         this.token = token;
         this.username = username;
-        this.roleId = roleId; // <-- Zorg ervoor dat je de roleId hebt opgeslagen
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
       }
     },
     logout() {
       this.token = '';
       this.username = '';
-      this.roleId = '';
       localStorage.removeItem('token');
       localStorage.removeItem('username');
-      localStorage.removeItem('roleId');
       axios.defaults.headers.common['Authorization'] = '';
     },
     register(username, password) {

@@ -64,48 +64,45 @@
   </template>
   
   <script>
-import Axios from "axios";
-
-export default {
-  name: "Register",
-  data() {
-    return {
+  import Axios from "axios";
+  
+  export default {
+    name: "Register",
+    data() {
+      return {
         user: {
-            username: "",
-            password: "",
-            roleId: 0,
-            email: "",
-            name: "",
-            adres: "",
-            phonenumber: ""
+          // User object properties
         },
         roles: [],
-    };
-  },
-  mounted() {
-    this.fetchRoles();
-  },
-  methods: {
-    fetchRoles() {
-      Axios.get("http://localhost/roles")
-        .then(result => this.roles = result.data)
-        .catch(error => console.log(error));
+      };
     },
-    register() {
-      Axios.post("http://localhost/users/register", this.user)
-        .then(result => {
-            console.log(result.data);
+    mounted() {
+      this.fetchRoles();
+    },
+    methods: {
+      fetchRoles() {
+        Axios.get("http://localhost/roles")
+          .then(result => this.roles = result.data)
+          .catch(error => console.log(error));
+      },
+      register() {
+        Axios.post("http://localhost/users/register", this.user)
+          .then(result => {
+            // Display an alert with the message
+            alert("Your account has been created");
             this.$refs.form.reset();
+            // Redirect to login page
             this.$router.push("/login");
-        })
-        .catch(error => console.log(error));
-    },
-    cancelRegister() {
+          })
+          .catch(error => console.log(error));
+      },
+      cancelRegister() {
         this.$router.push("/login");
-    }
-  },
-};
-</script>
+      }
+    },
+  };
+  </script>
+  
   
   <style>
   </style>
