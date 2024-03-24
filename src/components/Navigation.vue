@@ -16,6 +16,24 @@
         </li>
 
         <li class="nav-item">
+          <router-link to="/webshop" class="nav-link" active-class="active">
+            Webshop
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link to="/tickets" class="nav-link" active-class="active">
+            Tickets
+          </router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link to="/contact" class="nav-link" active-class="active">
+            Contact
+          </router-link>
+        </li>
+
+        <li class="nav-item">
           <router-link to="/articles" class="nav-link" active-class="active">
             Articles
           </router-link>
@@ -23,14 +41,18 @@
 
         
         <li v-if="isLoggedIn" class="nav-item">
+
           <router-link to="/" class="nav-link" @click="logout">
             Logout
           </router-link>
+
         </li>
         <li v-else class="nav-item">
+
           <router-link to="/login" class="nav-link" active-class="active">
             Login
           </router-link>
+
         </li>
 
 
