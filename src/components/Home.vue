@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h1 class="text-center fw-bold">Galatasaray</h1>
 
     <div class="container mt-5">
       <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">

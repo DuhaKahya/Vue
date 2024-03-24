@@ -11,6 +11,7 @@ import EditArticle from '../components/articles/EditArticle.vue';
 import Login from '../components/Login.vue';
 import Register from '../components/Register.vue';
 
+
 const routes = [
   { path: '/', component: Home },
   { path: '/about', component: About },
@@ -21,7 +22,8 @@ const routes = [
   { path: '/editarticle/:id', component: EditArticle, props: true  },
   
   { path: '/login', component: Login },
-  { path: '/register', component: Register }  
+  { path: '/register', component: Register } ,
+
 
 
 ];
