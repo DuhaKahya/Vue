@@ -14,6 +14,7 @@ import Register from '../components/Register.vue';
 const routes = [
   { path: '/', component: Home },
   { path: '/about', component: About },
+  { path: '/contact', component: Contact },
   
   { path: '/articles', component: ArticleList },
   { path: '/createarticle', component: CreateArticle },
