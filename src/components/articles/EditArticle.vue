@@ -61,7 +61,7 @@
   </template>
   
   <script>
-  import Axios from "axios";
+import Axios from '../axios-auth';
   
   export default {
     name: "EditArticle",
@@ -85,18 +85,18 @@
     },
     methods: {
         fetchCategories() {
-            Axios.get("http://localhost/categories")
+            Axios.get("/categories")
             .then(result => console.log(this.categories = result.data))
             .catch(error => console.log(error));
         
       },
       editArticle(id) {
-          Axios.get(`http://localhost/articles/${id}`) 
+          Axios.get("/articles/${id}") 
               .then(result => this.article = result.data)
               .catch(error => console.log(error));
       },
         saveChanges() {
-            Axios.put(`http://localhost/articles/${this.article.id}`, this.article)
+            Axios.put("/articles/${this.article.id}", this.article)
             .then(result => this.$router.push('/articles'))
             .catch(error => console.log(error));
         },

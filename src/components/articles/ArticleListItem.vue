@@ -60,7 +60,7 @@
 </template>
   
   <script>
-  import Axios from "axios";
+import Axios from '../axios-auth';
   
   export default {
     name: "ArticleListItem",
@@ -69,7 +69,7 @@
     },
     methods: {
       deleteArticle(id) {
-        Axios.delete("http://localhost/articles/" + id)
+        Axios.delete("/articles/" + id)
           .then((result) => {
             this.$emit("article-deleted", id);
             // refresh page

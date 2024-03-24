@@ -12,7 +12,7 @@
   
           <div class="input-group mb-3">
             <span class="input-group-text" style="width: 150px;">Email</span>
-            <input type="number" class="form-control" v-model="contact.email" />
+            <input type="text" class="form-control" v-model="contact.email" />
           </div>  
   
           <div class="input-group mb-3">
@@ -42,7 +42,7 @@
   </template>
   
   <script>
-  import Axios from "axios";
+import Axios from '../axios-auth';
   
   export default {
     name: "Contact",
@@ -58,7 +58,7 @@
     },
     methods: {
       sendContactForm() {
-        Axios.post("http://localhost/contact", this.contact)
+        Axios.post("/contact", this.contact)
           .then(result => {
             console.log(result.data);
             this.$refs.form.reset();

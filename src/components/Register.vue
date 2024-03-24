@@ -64,7 +64,7 @@
   </template>
   
   <script>
-import Axios from "axios";
+import Axios from '../axios-auth';
 
 export default {
   name: "Register",
@@ -87,12 +87,12 @@ export default {
   },
   methods: {
     fetchRoles() {
-      Axios.get("http://localhost/roles")
+      Axios.get("/roles")
         .then(result => this.roles = result.data)
         .catch(error => console.log(error));
     },
     register() {
-      Axios.post("http://localhost/users/register", this.user)
+      Axios.post("/users/register", this.user)
         .then(result => {
             console.log(result.data);
             this.$refs.form.reset();

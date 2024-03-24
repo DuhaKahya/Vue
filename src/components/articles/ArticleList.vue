@@ -19,7 +19,7 @@
   
   <script>
   import ArticleListItem from "./ArticleListItem.vue";
-  import Axios from "axios";
+  import Axios from '../axios-auth';
   
   export default {
     name: "ArticleList",
@@ -32,7 +32,7 @@
       };
     },
     mounted(){
-      Axios.get("http://localhost/articles")
+      Axios.get("/articles")
       .then(result => console.log(this.articles = result.data))
       .catch(error => console.log(error));
     }

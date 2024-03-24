@@ -5,6 +5,7 @@ export const useStore = defineStore('counter', {
   state: () => ({
     token: '',
     username: '',
+    roleId: '',
   }),
   getters: {
     isLoggedIn: (state) => state.token !== '',
@@ -25,10 +26,12 @@ export const useStore = defineStore('counter', {
             // Stel state variabelen in
             this.token = res.data;
             this.username = username;
+            this.roleId = res.data.roleId;
 
             // Zo kun je in de console je token zien in de 'application' tab
             localStorage.setItem('token', res.data);
             localStorage.setItem('username', username);
+            localStorage.setItem('roleId', res.data.roleId);
 
             // Resolve de Promise
             resolve();  
@@ -40,18 +43,22 @@ export const useStore = defineStore('counter', {
     autoLogin() {
       let token = localStorage.getItem('token');
       let username = localStorage.getItem('username');
+      let roleId = localStorage.getItem('roleId');
     
       if (token) {
         this.token = token;
         this.username = username;
+        this.roleId = roleId;
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
       }
     },
     logout() {
       this.token = '';
       this.username = '';
+      this.roleId = '';
       localStorage.removeItem('token');
       localStorage.removeItem('username');
+      localStorage.removeItem('roleId');
       axios.defaults.headers.common['Authorization'] = '';
     },
     register(username, password) {

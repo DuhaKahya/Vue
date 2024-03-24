@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import Axios from "axios";
+import Axios from '../axios-auth';
 
 export default {
   name: "CreateArticle",
@@ -86,12 +86,12 @@ export default {
   },
   methods: {
     fetchCategories() {
-      Axios.get("http://localhost/categories")
+      Axios.get("/categories")
         .then(result => this.categories = result.data)
         .catch(error => console.log(error));
     },
     createArticle() {
-      Axios.post("http://localhost/articles", this.article)
+      Axios.post("/articles", this.article)
         .then(result => {
           console.log(result.data);
           this.$refs.form.reset();
