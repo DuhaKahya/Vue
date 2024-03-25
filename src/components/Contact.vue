@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import Axios from '../axios-auth';
+import Axios from 'axios';
 
 export default {
   name: "Contact",
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     sendContactForm() {
-      Axios.post("/contact", this.contact)
+      Axios.post("http://localhost/contact", this.contact)
         .then(result => {
           alert("Contact form has been sent!");
           this.$refs.form.reset();

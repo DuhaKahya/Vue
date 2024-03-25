@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="container">
-      <button type="button" class="btn btn-primary mt-3" @click="this.$router.push('/createArticle');">
+      <button v-if="roleId === '1'" type="button" class="btn btn-primary mt-3" @click="this.$router.push('/createArticle');">
         Add Article
       </button>
       <!-- Webshop Articles -->
@@ -35,9 +35,15 @@
 <script>
 import ArticleListItem from "./ArticleListItem.vue";
 import Axios from "axios";
+import { useStore } from "../../stores/store";
 
 export default {
   name: "ArticleList",
+  setup() {
+    const store = useStore();
+    const roleId = store.getRoleId();
+    return { roleId };
+  },
   components: {
     ArticleListItem,
   },

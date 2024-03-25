@@ -76,6 +76,9 @@ export const useStore = defineStore('counter', {
           .catch((error) => reject(error.response.data.errorMessage));
       });
     },
+    getRoleId() {
+      return this.roleId;
+    }
 
   }
 });
