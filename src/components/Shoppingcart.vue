@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in shoppingCartItems" :key="item.id">
+        <tr v-for="item in unpaidItems" :key="item.id">
           <td>
             <input type="checkbox" v-model="selectedItems" :value="item.id" class="larger-checkbox">
           </td>
@@ -34,7 +34,7 @@
         <h4>Total Price: €{{ totalPrice }}</h4>
       </div>
       <div class="ml-auto">
-        <button class="btn btn-success btn-lg" @click="payForSelectedItems" :disabled="selectedItems.length === 0">Pay</button>
+        <button class="btn btn-success btn-lg" @click="confirmPayment" :disabled="selectedItems.length === 0">Pay</button>
       </div>
     </div>
   </div>
@@ -52,8 +52,11 @@ export default {
     };
   },
   computed: {
+    unpaidItems() {
+      return this.shoppingCartItems.filter(item => item.status === 'unpaid');
+    },
     totalPrice() {
-      return this.shoppingCartItems.reduce((total, item) => total + item.price, 0);
+      return this.unpaidItems.reduce((total, item) => total + item.price, 0);
     }
   },
   methods: {
@@ -87,8 +90,22 @@ export default {
         console.error('Error deleting item:', error);
       }
     },
-    payForSelectedItems() {
-      // Implement payment logic for selected items
+    async confirmPayment() {
+      if (confirm('Are you sure you want to pay for selected items?')) {
+        await this.payForSelectedItems();
+      }
+    },
+    async payForSelectedItems() {
+      try {               
+        for (const itemId of this.selectedItems) {
+          await Axios.put(`http://localhost/shoppingcart/${itemId}`, { status: 'paid' });
+        }
+        // Clear selected items after payment
+        this.selectedItems = [];
+        window.location.reload();
+      } catch (error) {
+        console.error('Error paying for selected items:', error);
+      }
     },
     getArticleTitle(articleid) {
       const article = this.articles.find(article => article.id === articleid);
