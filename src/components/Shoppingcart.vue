@@ -99,6 +99,7 @@ export default {
       try {               
         for (const itemId of this.selectedItems) {
           await Axios.put(`http://localhost/shoppingcart/${itemId}`, { status: 'paid' });
+          // quantity fixen
         }
         // Clear selected items after payment
         this.selectedItems = [];
