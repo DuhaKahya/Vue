@@ -86,7 +86,8 @@ export default {
   setup() {
     const store = useStore();
     const roleId = store.getRoleId() || '3';
-    return { roleId };
+    const userId = store.getUserId();
+    return { roleId, userId };
   },
   props: {
     article: Object,
@@ -111,7 +112,7 @@ export default {
     },
     addToCart(id) {
       Axios.post("http://localhost/articles/" + id, { 
-        userid: 2,
+        userid: this.userId,
         articleid: id,
         quantity: this.quantity,
         price: this.article.price,

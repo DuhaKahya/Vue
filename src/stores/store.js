@@ -6,6 +6,7 @@ export const useStore = defineStore('counter', {
     token: '',
     username: '',
     roleId: '',
+    userId: '',
   }),
   getters: {
     isLoggedIn: (state) => state.token !== '',
@@ -21,6 +22,7 @@ export const useStore = defineStore('counter', {
             
             const token = res.data.token;
             const roleId = res.data.roleId;
+            const userId = res.data.id;
 
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
@@ -28,11 +30,13 @@ export const useStore = defineStore('counter', {
             this.token = token;
             this.username = username;
             this.roleId = roleId;
+            this.userId = userId;
 
             // Zo kun je in de console je token zien in de 'application' tab
             localStorage.setItem('token', token);
             localStorage.setItem('username', username);
             localStorage.setItem('roleId', roleId);
+            localStorage.setItem('userId', userId);
 
             // Resolve de Promise
             resolve();  
@@ -45,11 +49,15 @@ export const useStore = defineStore('counter', {
       let token = localStorage.getItem('token');
       let username = localStorage.getItem('username');
       let roleId = localStorage.getItem('roleId');
+      let userId = localStorage.getItem('userId');
     
       if (token) {
+
         this.token = token;
         this.username = username;
         this.roleId = roleId;
+        this.userId = userId;
+
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
       }
     },
@@ -57,9 +65,13 @@ export const useStore = defineStore('counter', {
       this.token = '';
       this.username = '';
       this.roleId = '';
+      this.userId = '';
+
       localStorage.removeItem('token');
       localStorage.removeItem('username');
       localStorage.removeItem('roleId');
+      localStorage.removeItem('userId');
+
       axios.defaults.headers.common['Authorization'] = '';
     },
     register(username, password) {
@@ -78,7 +90,11 @@ export const useStore = defineStore('counter', {
     },
     getRoleId() {
       return this.roleId;
+    },
+    getUserId() {
+      return this.userId;
     }
+
 
   }
 });
