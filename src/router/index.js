@@ -11,6 +11,8 @@ import EditArticle from '../components/articles/EditArticle.vue';
 import Login from '../components/Login.vue';
 import Register from '../components/Register.vue';
 
+import Shoppingcart from '../components/Shoppingcart.vue';
+
 
 const routes = [
   { path: '/', component: Home },
@@ -23,6 +25,8 @@ const routes = [
   
   { path: '/login', component: Login },
   { path: '/register', component: Register } ,
+
+  { path: '/shoppingcart', component: Shoppingcart }
 
 
 

@@ -287,7 +287,7 @@
                     <div class="card-img-overlay">
                         <h5 class="card-title">Galatasaray Away Kit 2023/2024</h5>
                         <p class="card-text">Get your Galatasaray Away Kit now!</p>
-                        <a href="webshop" id="shopnowbutton" class="btn btn-primary">Shop now</a>
+                        <a href="articles" id="shopnowbutton" class="btn btn-primary">Shop now</a>
                     </div>
                 </div>
 
@@ -296,7 +296,7 @@
                     <div class="card-img-overlay">
                         <h5 class="card-title-white">Galatasaray vs Fenerbahce</h5>
                         <p class="card-text-white">Buy your tickets now!</p>
-                        <a href="tickets" id="shopnowbutton" class="btn btn-primary">Shop now</a>
+                        <a href="articles" id="shopnowbutton" class="btn btn-primary">Shop now</a>
                     </div>
                 </div>
 
