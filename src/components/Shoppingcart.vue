@@ -26,6 +26,7 @@
           <td>
             <button class="btn btn-danger" @click="confirmDelete(item.id)">Delete</button>
           </td>
+          
         </tr>
       </tbody>
     </table>
@@ -42,6 +43,7 @@
 
 <script>
 import Axios from 'axios';
+import { useStore } from '../stores/store';
 
 export default {
   data() {
@@ -50,6 +52,11 @@ export default {
       articles: [],
       selectedItems: []
     };
+  },
+  setup() {
+    const store = useStore();
+    const userId = store.getUserId();
+    return { userId };
   },
   computed: {
     unpaidItems() {
