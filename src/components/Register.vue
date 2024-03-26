@@ -71,7 +71,13 @@
     data() {
       return {
         user: {
-          // User object properties
+          username: "",
+          password: "",
+          roleId: 0,
+          email: "",
+          name: "",
+          adres: "",
+          phonenumber: "",
         },
         roles: [],
       };
