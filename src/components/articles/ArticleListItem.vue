@@ -111,19 +111,32 @@ export default {
       this.$router.push("/editarticle/" + id);
     },
     addToCart(id) {
-      Axios.post("http://localhost/articles/" + id, { 
-        userid: this.userId,
-        articleid: id,
-        quantity: this.quantity,
-        price: this.article.price,
-        totalprice: this.quantity * this.article.price,
-      })
-        .then((result) => {
-          alert("Article (id: "+this.article.id+") added to the shoppingcart with a quantity of " + this.quantity + "!");
-          this.$router.go();
+
+      Axios.get("http://localhost/articles/" + id)
+        .then((response) => {
+          const article = response.data;
+
+          if (article.stock < this.quantity) {
+            alert("Insufficient stock available.");
+            return;
+          }
+
+          Axios.post("http://localhost/articles/" + id, { 
+            userid: this.userId,
+            articleid: id,
+            quantity: this.quantity,
+            price: this.article.price,
+            totalprice: this.quantity * this.article.price,
+          })
+          .then((result) => {
+            alert("Article (id: "+this.article.id+") added to the shoppingcart with a quantity of " + this.quantity + "!");
+            this.$router.go();
+          })
+          .catch((error) => console.log(error));
         })
         .catch((error) => console.log(error));
     },
+
 
     incrementQuantity() {
       this.quantity++;
