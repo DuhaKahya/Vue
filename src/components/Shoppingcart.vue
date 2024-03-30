@@ -7,6 +7,8 @@
           <th>Select</th>
           <th>Article Title</th>
           <th>Article Description</th>
+          <th>User ID</th>
+          <th>User ID (Shoppingcart table)</th>
           <th>Quantity</th>
           <th>Price</th>
           <th>Total Price</th>
@@ -20,6 +22,8 @@
           </td>
           <td>{{ getArticleTitle(item.articleid) }}</td>
           <td>{{ getArticleDescription(item.articleid) }}</td>
+          <td>{{ this.userId }}</td>
+          <td>{{ item.userid }}</td>
           <td>{{ item.quantity }}</td>
           <td>€{{ item.price }}</td>
           <td>€{{ item.totalprice}}</td>
@@ -32,7 +36,7 @@
     </table>
     <div class="mt-3 d-flex justify-content-between align-items-center">
       <div>
-        <h4>Total Price: €{{ totalPrice }}</h4>
+        <h4>Total Price: €{{ totalPrice.toFixed(2) }}</h4>
       </div>
       <div class="ml-auto">
         <button class="btn btn-success btn-lg" @click="confirmPayment" :disabled="selectedItems.length === 0">Pay</button>
@@ -60,7 +64,7 @@ export default {
   },
   computed: {
     unpaidItems() {
-      return this.shoppingCartItems.filter(item => item.status === 'unpaid');
+      return this.shoppingCartItems.filter(item => item.status === 'unpaid' );
     },
     totalPrice() {
       return this.unpaidItems.reduce((total, item) => total + item.price, 0);
