@@ -10,6 +10,8 @@ export const useStore = defineStore('counter', {
   }),
   getters: {
     isLoggedIn: (state) => state.token !== '',
+    getRoleId: (state) => state.roleId,
+    getUserId: (state) => state.userId,
   },
   actions: {
     login(username, password) {
@@ -88,13 +90,6 @@ export const useStore = defineStore('counter', {
           .catch((error) => reject(error.response.data.errorMessage));
       });
     },
-    getRoleId() {
-      return this.roleId;
-    },
-    getUserId() {
-      return this.userId;
-    }
-
 
   }
 });

@@ -40,8 +40,8 @@ import { useStore } from "../../stores/store";
 export default {
   name: "ArticleList",
   setup() {
-    const store = useStore();
-    const roleId = store.getRoleId();
+    let store = useStore();
+    let roleId = store.$state.roleId;
     return { roleId };
   },
   components: {

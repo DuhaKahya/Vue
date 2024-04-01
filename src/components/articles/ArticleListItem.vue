@@ -84,9 +84,9 @@ import { useStore } from '../../stores/store';
 export default {
   name: "ArticleListItem",
   setup() {
-    const store = useStore();
-    const roleId = store.getRoleId() || '3';
-    const userId = store.getUserId();
+    let store = useStore();
+    let roleId = store.$state.roleId || '3';
+    let userId = store.$state.userId;
     return { roleId, userId };
   },
   props: {

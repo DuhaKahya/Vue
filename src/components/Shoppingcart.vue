@@ -1,4 +1,9 @@
 <template>
+
+ <!-- Show the store userid-->
+{{ this.userId }}
+
+
   <div class="container">
     <h1 class="text-center fw-bold">Shopping Cart</h1>
     <table class="table">
@@ -58,13 +63,13 @@ export default {
     };
   },
   setup() {
-    const store = useStore();
-    const userId = store.getUserId();
+    let store = useStore();
+    let userId = store.userId;
     return { userId };
   },
   computed: {
     unpaidItems() {
-      return this.shoppingCartItems.filter(item => item.status === 'unpaid' );
+      return this.shoppingCartItems.filter(item => item.status === 'unpaid' && item.userid === parseInt(this.userId));
     },
     totalPrice() {
       return this.unpaidItems.reduce((total, item) => total + item.price, 0);
