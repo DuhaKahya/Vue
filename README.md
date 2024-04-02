@@ -1,15 +1,14 @@
-# vue-crud-starter
+Login:
 
-This template is designed for an assignment to develop CRUD functionality on a Vue application with a REST API backend.
+As Admin:
+username: username
+password: password
 
-## Project Setup
+As Customer:
+username: d.kahya
+password: duha
 
-```sh
-npm install
-```
+or 
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
+username: mark
+password: mark
