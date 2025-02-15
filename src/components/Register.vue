@@ -86,26 +86,35 @@
       this.fetchRoles();
     },
     methods: {
-      fetchRoles() {
-        Axios.get("http://localhost/roles")
-          .then(result => this.roles = result.data)
-          .catch(error => console.log(error));
-      },
-      register() {
-        Axios.post("http://localhost/users/register", this.user)
-          .then(result => {
-            // Display an alert with the message
-            alert("Your account has been created");
-            this.$refs.form.reset();
-            // Redirect to login page
-            this.$router.push("/login");
-          })
-          .catch(error => console.log(error));
-      },
-      cancelRegister() {
-        this.$router.push("/login");
-      }
+    fetchRoles() {
+      Axios.get("http://localhost/roles")
+        .then(result => this.roles = result.data)
+        .catch(error => console.log(error));
     },
+    register() {
+      Axios.post("http://localhost/users/register", this.user)
+        .then(result => {
+          // Display an alert with the message
+          alert("Your account has been created");
+          this.$refs.form.reset();
+          // Redirect to login page
+          this.$router.push("/login");
+        })
+        .catch(error => {
+          if (error.response && error.response.status === 409) {
+            // Handle username already taken error
+            alert("Username already taken. Please choose another one.");
+          } else {
+            console.error("An error occurred:", error);
+            alert("An error occurred while trying to register. Please try again.");
+          }
+        });
+    },
+    cancelRegister() {
+      this.$router.push("/login");
+    }
+  }
+
   };
   </script>
   

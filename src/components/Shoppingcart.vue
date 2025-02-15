@@ -1,8 +1,6 @@
 <template>
-
- <!-- Show the store userid-->
-{{ this.userId }}
-
+  <!-- Show the store userid-->
+  {{ userId }}
 
   <div class="container">
     <h1 class="text-center fw-bold">Shopping Cart</h1>
@@ -21,21 +19,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in unpaidItems" :key="item.id">
+        <tr v-for="item in shoppingCartItems" :key="item.id">
           <td>
             <input type="checkbox" v-model="selectedItems" :value="item.id" class="larger-checkbox">
           </td>
           <td>{{ getArticleTitle(item.articleid) }}</td>
           <td>{{ getArticleDescription(item.articleid) }}</td>
-          <td>{{ this.userId }}</td>
+          <td>{{ userId }}</td>
           <td>{{ item.userid }}</td>
           <td>{{ item.quantity }}</td>
           <td>€{{ item.price }}</td>
-          <td>€{{ item.totalprice}}</td>
+          <td>€{{ item.totalprice }}</td>
           <td>
             <button class="btn btn-danger" @click="confirmDelete(item.id)">Delete</button>
           </td>
-          
         </tr>
       </tbody>
     </table>
@@ -68,17 +65,15 @@ export default {
     return { userId };
   },
   computed: {
-    unpaidItems() {
-      return this.shoppingCartItems.filter(item => item.status === 'unpaid' && item.userid === parseInt(this.userId));
-    },
     totalPrice() {
-      return this.unpaidItems.reduce((total, item) => total + item.price, 0);
+      return this.shoppingCartItems.reduce((total, item) => total + item.totalprice, 0);
     }
   },
   methods: {
-    async getAllShoppingCartItems() {
+    async getCartOfUser(userId) {
       try {
-        const response = await Axios.get('http://localhost/shoppingcart');
+        // Use the correct URL to fetch all shopping cart items of a specific user
+        const response = await Axios.get(`http://localhost/shoppingcart/${userId}`);
         this.shoppingCartItems = response.data;
         await this.getAllArticles();
       } catch (error) {
@@ -95,7 +90,7 @@ export default {
     },
     async confirmDelete(itemId) {
       if (confirm('Are you sure you want to delete this item?')) {
-        this.deleteItem(itemId);
+        await this.deleteItem(itemId);
       }
     },
     async deleteItem(itemId) {
@@ -118,7 +113,7 @@ export default {
         }
         // Clear selected items after payment
         this.selectedItems = [];
-        window.location.reload();
+        await this.getCartOfUser(this.userId); // Refresh the list
       } catch (error) {
         console.error('Error paying for selected items:', error);
       }
@@ -133,7 +128,7 @@ export default {
     }
   },
   mounted() {
-    this.getAllShoppingCartItems();
+    this.getCartOfUser(this.userId);
   }
 };
 </script>
